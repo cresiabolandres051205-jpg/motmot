@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Special Surprise</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital@0;1&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --pastel-pink: #fbc4ab;
+            --soft-rose: #ffddd2;
+            --deep-rose: #e29578;
+            --text-color: #6d5959;
+            --glass: rgba(255, 255, 255, 0.4);
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            background: linear-gradient(135deg, #fdfcfb 0%, #e2d1c3 100%);
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-color);
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Animated Soft Ambient Background */
+        .bg-gradient {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 30%, var(--soft-rose) 0%, transparent 40%),
+                        radial-gradient(circle at 80% 70%, var(--pastel-pink) 0%, transparent 40%);
+            z-index: -1;
+            filter: blur(80px);
+        }
+
+        .container {
+            text-align: center;
+            z-index: 10;
+            padding: 40px;
+            border-radius: 30px;
+            background: var(--glass);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
+            max-width: 400px;
+            width: 80%;
+        }
+
+        /* Elegant Icon Styling */
+        .mystery-box {
+            font-size: 80px;
+            cursor: pointer;
+            display: inline-block;
+            transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.05));
+        }
+
+        .mystery-box:hover {
+            transform: scale(1.1) translateY(-10px);
+        }
+
+        .mystery-box.opened {
+            transform: scale(0);
+            opacity: 0;
+        }
+
+        h2 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 400;
+            font-style: italic;
+            letter-spacing: 1px;
+            margin-top: 25px;
+            color: var(--text-color);
+            font-size: 1.4rem;
+        }
+
+        /* Content Revealed Area */
+        .reveal-content {
+            display: none;
+            opacity: 0;
+            transform: scale(0.9);
+            transition: all 1s ease;
+        }
+
+        .reveal-content.active {
+            display: block;
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .enter-btn {
+            margin-top: 20px;
+            padding: 15px 45px;
+            font-size: 0.9rem;
+            background: white;
+            color: var(--text-color);
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            font-weight: 400;
+        }
+
+        .enter-btn:hover {
+            background: var(--text-color);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 15px 25px rgba(109, 89, 89, 0.2);
+        }
+
+        /* Soft Pastel Petals/Hearts */
+        .particle {
+            position: absolute;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.6;
+            animation: fall 6s linear forwards;
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(-10vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.6; }
+            100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="bg-gradient"></div>
+
+    <div class="container" id="mainCard">
+        <div id="boxSection">
+            <div class="mystery-box" onclick="revealGift()">🎁</div>
+            <h2 id="instruction">A little something for you...</h2>
+        </div>
+
+        <div class="reveal-content" id="revealArea">
+            <h1 style="font-family: 'Playfair Display', serif; font-size: 2rem; margin-bottom: 20px;">For My Love</h1>
+            <p style="font-size: 0.9rem; margin-bottom: 30px; line-height: 1.6;">Your surprise is ready. Are you?</p>
+            <a href="index.html" class="enter-btn">Step Inside</a>
+        </div>
+    </div>
+
+    <script>
+        function revealGift() {
+            const box = document.getElementById('boxSection');
+            const reveal = document.getElementById('revealArea');
+            
+            box.style.transition = "0.5s";
+            box.style.opacity = "0";
+            box.style.transform = "scale(0.8)";
+            
+            setTimeout(() => {
+                box.style.display = 'none';
+                reveal.classList.add('active');
+            }, 500);
+        }
+
+        // Professional Particle Spawner (Soft Rose Petals/Hearts)
+        function createParticle() {
+            const colors = ['#fbc4ab', '#ffddd2', '#edf6f9', '#ffb5a7'];
+            const particle = document.createElement('div');
+            particle.classList.add('particle');
+            
+            // Randomly choose between a heart and a soft circle
+            particle.innerHTML = Math.random() > 0.5 ? '🌸' : '🤍';
+            
+            particle.style.left = Math.random() * 100 + 'vw';
+            particle.style.fontSize = (Math.random() * 15 + 10) + 'px';
+            particle.style.color = colors[Math.floor(Math.random() * colors.length)];
+            particle.style.animationDuration = (Math.random() * 3 + 4) + 's';
+            
+            document.body.appendChild(particle);
+
+            setTimeout(() => { particle.remove(); }, 6000);
+        }
+
+        setInterval(createParticle, 400);
+    </script>
+</body>
+</html>

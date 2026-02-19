@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Potpot & Me | Our Polaroid Collection ❤️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=Poppins:wght@300;400;600&family=Great+Vibes&family=Indie+Flower&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --soft-peach: #f8f5f2; /* Slightly more "paper" toned */
+            --warm-beige: #e2d1c3;
+            --accent-gold: #c5a880; 
+            --text-main: #5d4a4a;
+            --glass: rgba(255, 255, 255, 0.9);
+        }
+
+        body {
+            background-color: var(--soft-peach);
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-main);
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            /* Added a subtle paper texture background */
+            background-image: url("https://www.transparenttextures.com/patterns/cream-paper.png");
+        }
+
+        /* Modern Sticky Header */
+        .top-bar {
+            position: sticky;
+            top: 0;
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .btn-back {
+            text-decoration: none;
+            color: var(--text-main);
+            background: white;
+            padding: 8px 18px;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            transition: 0.3s;
+            border: 1px solid #eee;
+        }
+
+        .btn-back:hover {
+            background: var(--accent-gold);
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .header-mini-title {
+            font-family: 'Great Vibes', cursive;
+            font-size: 1.8rem;
+            color: var(--accent-gold);
+            margin: 0;
+        }
+
+        header {
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        header h1 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 4rem;
+            color: var(--accent-gold);
+            margin: 0;
+        }
+
+        header p {
+            font-family: 'Indie Flower', cursive; /* Handwritten feel */
+            font-size: 1.4rem;
+            margin-top: 5px;
+            color: #8a7b7b;
+        }
+
+        /* Polaroid Masonry Grid */
+        .portfolio-container {
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        .photo-card {
+            background: white;
+            padding: 12px 12px 40px 12px; /* Classic Polaroid bottom-heavy padding */
+            border-radius: 2px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            transition: all 0.4s ease;
+            cursor: zoom-in;
+            opacity: 0;
+            transform: translateY(30px);
+            width: 280px; /* Fixed width for polaroid look */
+            position: relative;
+            border: 1px solid #efefef;
+        }
+
+        .photo-card.reveal {
+            opacity: 1;
+        }
+
+        /* Random rotation for the scattered look */
+        .photo-card:nth-child(even) { transform: rotate(2deg) translateY(30px); }
+        .photo-card:nth-child(odd) { transform: rotate(-3deg) translateY(30px); }
+        .photo-card:nth-child(3n) { transform: rotate(1.5deg) translateY(30px); }
+
+        .photo-card.reveal:hover {
+            transform: scale(1.1) rotate(0deg) !important;
+            z-index: 10;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+
+        .photo-card img {
+            width: 100%;
+            aspect-ratio: 1/1; /* Polaroids are usually square */
+            object-fit: cover;
+            display: block;
+            filter: sepia(10%) contrast(110%); /* Subtle vintage filter */
+        }
+
+        .photo-info {
+            padding-top: 15px;
+            text-align: center;
+        }
+
+        .photo-info span {
+            font-family: 'Indie Flower', cursive; /* Handwritten caption */
+            font-size: 1.2rem;
+            color: #4a4a4a;
+            display: block;
+        }
+
+        /* Lightbox Overlay */
+        .lightbox {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            cursor: zoom-out;
+        }
+
+        .lightbox img {
+            max-width: 90%;
+            max-height: 80vh;
+            border: 10px solid white; /* Keep polaroid look in zoom */
+            border-bottom: 40px solid white;
+        }
+
+        footer {
+            text-align: center;
+            padding: 80px 20px;
+            font-family: 'Indie Flower', cursive;
+            font-size: 1.8rem;
+            color: var(--accent-gold);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-bar">
+        <a href="index.html" class="btn-back">← Back</a>
+        <h2 class="header-mini-title">Our Memories</h2>
+        <div style="width: 60px;"></div>
+    </div>
+
+    <header>
+        <h1>Our Polaroid Wall</h1>
+        <p>Capturing 65 months of us...</p>
+    </header>
+
+    <div class="portfolio-container" id="gallery">
+        <div class="photo-card">
+            <img src="img/1st.jpg" alt="Memory">
+            <div class="photo-info"><span>Where it all began ❤️</span></div>
+        </div>
+        
+        <div class="photo-card">
+            <img src="img/1.jpg" onerror="this.src='https://via.placeholder.com/400?text=Us+1'">
+            <div class="photo-info"><span>Best day ever</span></div>
+        </div>
+        
+        <div class="photo-card">
+            <img src="img/2.jpg" onerror="this.src='https://via.placeholder.com/400?text=Us+2'">
+            <div class="photo-info"><span>That one smile</span></div>
+        </div>
+
+        <div class="photo-card">
+            <img src="img/3.jpg" onerror="this.src='https://via.placeholder.com/400?text=Us+3'">
+            <div class="photo-info"><span>Homiee!</span></div>
+        </div>
+
+        <div class="photo-card">
+            <img src="img/4.jpg" onerror="this.src='https://via.placeholder.com/400?text=Us+4'">
+            <div class="photo-info"><span>Supportive Baby</span></div>
+        </div>
+
+        <div class="photo-card"><img src="img/5.jpg" onerror="this.src='https://via.placeholder.com/400?text=Potpot+5'"><div class="photo-info"><span>Us being cutiee</span></div></div>
+        <div class="photo-card"><img src="img/6.jpg" onerror="this.src='https://via.placeholder.com/400?text=Potpot+6'"><div class="photo-info"><span>Always you</span></div></div>
+        <div class="photo-card"><img src="img/7.jpg" onerror="this.src='https://via.placeholder.com/400?text=Potpot+7'"><div class="photo-info"><span>You adoring my pics...</span></div></div>
+        <div class="photo-card"><img src="img/8.jpg" onerror="this.src='https://via.placeholder.com/400?text=Potpot+8'"><div class="photo-info"><span>Clingyy</span></div></div>
+        <div class="photo-card"><img src="img/9.jpg" onerror="this.src='https://via.placeholder.com/400?text=Potpot+9'"><div class="photo-info"><span>Me as ur parent hehe</span></div></div>
+        <div class="photo-card"><img src="img/10.jpg" onerror="this.src='https://via.placeholder.com/400?text=Potpot+10'"><div class="photo-info"><span>Love this one</span></div></div>
+        <div class="photo-card"><img src="img/11.jpg" onerror="this.src='https://via.placeholder.com/400?text=Potpot+11'"><div class="photo-info"><span>lovelovee!</span></div></div>
+        <div class="photo-card"><img src="img/12.jpg" onerror="this.src='https://via.placeholder.com/400?text=Potpot+12'"><div class="photo-info"><span>Sweet moments</span></div></div>
+        <div class="photo-card"><img src="img/13.jpg" onerror="this.src='https://via.placeholder.com/400?text=Potpot+13'"><div class="photo-info"><span>Grateful for you</span></div></div>
+        <div class="photo-card"><img src="img/14.jpg" onerror="this.src='https://via.placeholder.com/400?text=Potpot+14'"><div class="photo-info"><span>Us against the world</span></div></div>
+        <div class="photo-card"><img src="img/15.jpg" onerror="this.src='https://via.placeholder.com/400?text=Potpot+15'"><div class="photo-info"><span>Keep shining</span></div></div>
+        <div class="photo-card"><img src="img/16.jpg" onerror="this.src='https://via.placeholder.com/400?text=Potpot+16'"><div class="photo-info"><span>Thinking of you</span></div></div>
+        <div class="photo-card"><img src="img/17.jpg" onerror="this.src='https://via.placeholder.com/400?text=Potpot+17'"><div class="photo-info"><span>Another year</span></div></div>
+        <div class="photo-card"><img src="img/18.jpg" onerror="this.src='https://via.placeholder.com/400?text=Potpot+18'"><div class="photo-info"><span>My home</span></div></div>
+        <div class="photo-card"><img src="img/19.jpg" onerror="this.src='https://via.placeholder.com/400?text=Potpot+19'"><div class="photo-info"><span>Soulmates</span></div></div>
+        <div class="photo-card"><img src="img/20.jpg" onerror="this.src='https://via.placeholder.com/400?text=Potpot+20'"><div class="photo-info"><span>65 months!</span></div></div>
+
+        <div class="photo-card">
+            <img src="img/hehe.jpg" alt="Memory">
+            <div class="photo-info"><span>Always & Forever Kiat</span></div>
+        </div>
+    </div>
+
+    <div class="lightbox" id="lightbox" onclick="this.style.display='none'">
+        <img src="" id="lightbox-img">
+    </div>
+
+    <footer>
+        To be continued... ❤️
+    </footer>
+
+    <script>
+        const observerOptions = { threshold: 0.1 };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('reveal');
+                    // Once revealed, re-apply the random rotations if they were reset
+                    const originalTransform = window.getComputedStyle(entry.target).transform;
+                    entry.target.style.transform = originalTransform;
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.photo-card').forEach(card => {
+            observer.observe(card);
+        });
+
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+
+        document.querySelectorAll('.photo-card img').forEach(image => {
+            image.parentElement.addEventListener('click', () => {
+                lightboxImg.src = image.src;
+                lightbox.style.display = 'flex';
+            });
+        });
+    </script>
+
+</body>
+</html>

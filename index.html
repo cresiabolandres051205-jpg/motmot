@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>65 Months with Potpot ❤️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Poppins:wght@300;400;600&family=Great+Vibes&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --soft-peach: #fdfcfb;
+            --warm-beige: #e2d1c3;
+            --accent-gold: #c5a880; 
+            --accent-rose: #e29578;
+            --text-main: #5d4a4a;
+            --glass-white: rgba(255, 255, 255, 0.7);
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--soft-peach) 0%, var(--warm-beige) 100%);
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-main);
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+            padding: 20px;
+        }
+
+        .floating-bg {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .main-card {
+            background: var(--glass-white);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: 40px;
+            padding: 60px 40px;
+            max-width: 650px;
+            width: 100%;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.08);
+            text-align: center;
+            animation: fadeIn 2s ease;
+            position: relative;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .badge {
+            display: inline-block;
+            background: var(--accent-gold);
+            color: white;
+            padding: 5px 20px;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .recipient-name {
+            font-family: 'Great Vibes', cursive;
+            font-size: 3.5rem;
+            color: var(--accent-gold);
+            margin: 10px 0;
+            text-shadow: 2px 2px 10px rgba(197, 168, 128, 0.2);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            margin: 0;
+            color: var(--text-main);
+            font-weight: 400;
+        }
+
+        .subtitle {
+            font-style: italic;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            color: var(--accent-rose);
+        }
+
+        .timer-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin: 40px 0;
+        }
+
+        .timer-unit {
+            background: white;
+            padding: 20px 10px;
+            border-radius: 25px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.02);
+            border: 1px solid #f0f0f0;
+        }
+
+        .timer-unit span {
+            display: block;
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--accent-gold);
+        }
+
+        .timer-unit label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.6;
+        }
+
+        .love-note {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin: 40px 0;
+            padding: 0 30px;
+            font-style: italic;
+        }
+
+        .button-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            align-items: center;
+            margin-top: 50px;
+        }
+
+        .btn {
+            background: var(--accent-gold);
+            color: white;
+            padding: 14px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            width: 220px;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: 0.4s;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(197, 168, 128, 0.3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--accent-gold);
+            border: 1px solid var(--accent-gold);
+        }
+
+        .btn:hover {
+            background: var(--text-main);
+            color: white;
+            transform: scale(1.05);
+        }
+
+        /* Modal Styling */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(93, 74, 74, 0.6);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 40px;
+            border-radius: 30px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            text-align: left;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px; right: 20px;
+            background: none; border: none;
+            font-size: 1.8rem; cursor: pointer; color: var(--accent-gold);
+        }
+
+        .sparkle {
+            position: absolute;
+            pointer-events: none;
+            animation: twinkle 2s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="floating-bg" id="particles"></div>
+
+    <div class="main-card">
+        <div class="badge">Sixty-Five Months</div>
+        <h1>To my favorite person,</h1>
+        <div class="recipient-name">My love, Potpot</div>
+        <div class="subtitle">Happy 65th Monthsary!</div>
+
+        <div class="timer-container" id="timer">
+            <div class="timer-unit"><span id="days">0</span><label>Days</label></div>
+            <div class="timer-unit"><span id="hours">0</span><label>Hours</label></div>
+            <div class="timer-unit"><span id="mins">0</span><label>Minutes</label></div>
+        </div>
+
+        <p class="love-note">
+            "Potpot, 65 months of choosing you, and I’d still choose you in every lifetime."
+        </p>
+      
+        <div class="button-group">
+            <button class="btn" onclick="openModal('messageModal')">Open My Letter</button>
+            
+            <a href="photo.html" class="btn btn-secondary">View Our Photos</a>
+            
+            <button class="btn btn-secondary" style="border:none; background:transparent; font-size:0.7rem;" onclick="celebrate()">✨ Click for Surprise</button>
+        </div>
+    </div>
+
+    <div id="messageModal" class="modal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal('messageModal')">×</button>
+            <h2 style="font-family:'Great Vibes'; color:var(--accent-gold); font-size:2.5rem;">Dear Potpot,</h2>
+            <p style="font-family:'Playfair Display'; line-height:2; white-space:pre-line;">
+               Happy 65th monthsary, potpot my love.
+I still cannot believe we have reached this far. Sixty five months sounds so unreal when I really think about it. We have been through so many things together, and yet here we are, still choosing each other, still trying, still loving.
+
+Thank you for staying with me through the normal days and the difficult ones. Thank you for understanding me even when I cannot explain myself properly. I know I am not perfect, and I know loving me is not always easy, but you still choose to stay, and that means everything to me.
+
+What I love about us is how real everything feels. It is not always grand or perfect, but it is always honest. The simple conversations, the random moments, the quiet times, and even the misunderstandings. All of it matters to me because it is us. Being with you feels safe and familiar in the best way.
+
+You make my days lighter just by being there. Even when nothing special is happening, it feels special because I get to share it with you. I am so thankful for your patience, your effort, your care, and the love you give in your own way.
+
+Sixty five months with you is something I am truly proud of. I am proud of how far we have come and how we continue to grow together. I hope we keep choosing each other again and again, through every season.
+
+Happy monthsary, potpot. I love you always, and I am so grateful that I get to love you.
+                
+                Forever yours,
+                Bambam
+            </p>
+        </div>
+    </div>
+
+    <script>
+        const anniversary = new Date(2020, 8, 19); 
+
+        function updateTimer() {
+            const now = new Date();
+            const diff = now - anniversary;
+            document.getElementById('days').innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
+            document.getElementById('hours').innerText = Math.floor((diff / (1000 * 60 * 60)) % 24);
+            document.getElementById('mins').innerText = Math.floor((diff / 1000 / 60) % 60);
+        }
+        setInterval(updateTimer, 1000);
+        updateTimer();
+
+        function openModal(id) {
+            document.getElementById(id).style.display = 'flex';
+        }
+
+        function closeModal(id) {
+            document.getElementById(id).style.display = 'none';
+        }
+
+        function celebrate() {
+            alert("Potpot, you're the best! I love you so much! ❤️");
+        }
+
+        function createSparkle() {
+            const particle = document.createElement('div');
+            particle.className = 'sparkle';
+            particle.innerHTML = '✨';
+            particle.style.left = Math.random() * 100 + 'vw';
+            particle.style.top = Math.random() * 100 + 'vh';
+            particle.style.color = '#c5a880';
+            document.getElementById('particles').appendChild(particle);
+            setTimeout(() => { particle.remove(); }, 3000);
+        }
+        setInterval(createSparkle, 600);
+
+        window.onclick = function(event) {
+            if (event.target.className === 'modal') {
+                event.target.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
